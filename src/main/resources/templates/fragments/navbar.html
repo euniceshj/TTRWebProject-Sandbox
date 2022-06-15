@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="navbar-section">
+    <!-- innerHTML from JS -->
+
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+
+            <a class="navbar-brand col-4 col-sm-3 col-lg-2" th:href="@{index}"><img src="images/brand-logo-white.png" alt="brand-logo-img" class="d-inline-block align-text-center img-fluid"></a>
+
+            <div class="navbar-header col-4 col-sm-6 px-2 d-none d-sm-block d-lg-none display-4">
+                <div class="input-group">
+                    <input id="searchBar" class="form-control border-end-0 rounded-pill" type="text" placeholder="Search" aria-label="Search">
+                    <span>
+                        <button class="btn btn-outline-secondary bg-white border-0 rounded-pill offset-n40" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto flex-fill justify-content-lg-around align-items-lg-center">
+
+                    <li class="nav-item col-12 col-lg-3 d-block d-sm-none d-lg-block">
+                        <div class="input-group">
+                            <input id="searchBar2" class="form-control border-end-0 rounded-pill" type="text" placeholder="Search" aria-label="Search">
+                            <span>
+                                <button class="btn btn-outline-secondary bg-white border-0 rounded-pill offset-n75" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="nav-item fst-italic">
+                        <a class="nav-link" th:href="@{aboutme}">About Us</a>
+                    </li>
+                    <li class="nav-item fst-italic">
+                        <a class="nav-link" th:href="@{products}">Products</a>
+                    </li>
+                    <li class="nav-item fst-italic">
+                        <a class="nav-link" th:href="@{listCollection}">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{loginPage}">
+                            <i class="bi bi-person-circle d-none d-lg-block"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div>
+                            <i class="bi bi-wallet2 d-none d-lg-block text-secondary"></i>
+                        </div>
+                        <a href="loginPage.html" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+
+</body>
+</html>

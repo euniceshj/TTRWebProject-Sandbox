@@ -1,0 +1,55 @@
+/* Global CSS */
+* {
+    box-sizing: border-box;
+    font-family: "Urbanist", sans-serif;
+}
+
+/* Navbar Section */
+.navbar {
+    background-image: url("../images/header-background.jpg");
+}
+
+.navbar-brand {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.navbar-brand img {
+    max-height: 6rem;
+}
+
+.navbar-nav li,
+.navbar-nav span {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.navbar-nav i {
+    padding: 10px;
+    font-size: 2rem;
+}
+
+.offset-n40 {
+    margin-left: -40px;
+    margin-bottom: 5px;
+}
+
+.offset-n75 {
+    margin-left: -75px;
+}
+
+/* Footer Section */
+.footer-section {
+    background-color: #94daff;
+    opacity: 0.9;
+}
+
+.footer-section .footer-text p {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.footer-section i {
+    font-size: 1.3rem;
+}

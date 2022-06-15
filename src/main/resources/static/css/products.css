@@ -1,0 +1,104 @@
+.container-fluid-slim {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.btn-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    margin-bottom: 40px;
+}
+
+.btn-group > button {
+    margin: 40px;
+    padding: 5px 25px;
+    font-size: 22px;
+}
+
+.btn.dropdown-toggle {
+    background-color: #94daff;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.product-header > h2 {
+    font-size: 44px;
+    font-family: "Aleo", serif;
+    font-style: italic;
+}
+
+.like-button {
+    position: relative;
+}
+
+.like-button img {
+    display: block;
+    height: 400px;
+}
+
+.like-button > button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    color: #fff;
+}
+
+.like-button > button:hover {
+    color: red;
+}
+
+.item-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+.card-body > h4 {
+    border-bottom: 1px dotted grey;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.modal-card-title {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.footer-section {
+    background-color: #94daff;
+}
+
+/* @media screen and (max-width: 768px) {
+  .btn-group {
+    display: none;
+  }
+} */
+
+@media screen and (max-width: 768px) {
+    .btn.btn-lg {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .dropdown {
+        display: none;
+    }
+}

@@ -1,0 +1,64 @@
+/* Header Section */
+header {
+    background-color: white;
+    background-image: linear-gradient(to bottom, transparent, white),
+        url("../images/header-background.jpg");
+    background-size: cover;
+    margin-top: 95px !important;
+    padding-top: 55px;
+}
+
+.header-con2 img {
+    padding: 30px;
+    background-color: none;
+    opacity: 70%;
+}
+
+.create-btn:hover {
+    color: #0d6efd;
+    border-color: #0d6efd;
+    background-color: rgb(240, 234, 234) !important;
+}
+
+/* Carousel Section */
+.card-img-top {
+    height: 40vh;
+}
+
+@media only screen and (min-width: 992px) {
+    .card-img-top {
+        height: 50vh;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .card-img-top {
+        height: 60vh;
+    }
+}
+
+.carousel-inner {
+    padding-bottom: 20px;
+}
+
+.carousel .carousel-indicators button {
+    background-color: #94daff;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin: 0 10px;
+}
+
+/* Koyok Section */
+
+/* Sponsor Section */
+
+.sponsor-section img {
+    max-height: 200px;
+}
+
+/* Contact Us Section */
+.contact-section {
+    background-color: #94daff;
+    opacity: 0.9;
+}

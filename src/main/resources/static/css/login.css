@@ -1,0 +1,45 @@
+.form-section {
+    font-family: "Arial", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", sans-serif;
+}
+.login-section {
+    margin-top: 150px;
+    /* position: relative; */
+}
+
+h1 {
+    margin: 20px 0px;
+    font-weight: bold;
+}
+
+.disabled-option {
+    color: #999;
+}
+
+/* .label-margin {
+    margin: 5px 0px;
+} */
+
+.pw-margin {
+    margin-top: 20px;
+}
+
+.forgetPW-margin {
+    margin: 5px 0px 50px 0px;
+}
+
+.button-margin {
+    margin: 100px 0px 20px 0px;
+}
+
+.submitBtn-margin {
+    margin: 20px 0px 150px;
+}
+
+.collectionField-margin {
+    margin: 5px 0px 20px 0px;
+}
+
+.loginBtn-margin {
+    margin: 0 0 150px;
+}
