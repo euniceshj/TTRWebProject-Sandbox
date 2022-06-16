@@ -18,27 +18,46 @@ class NftController {
             "collectibles2",
         ];
 
-        this.like = 0; // Initialize initial likes to zero, will increase per click with addLike() method
         this.counter = 0; // Initialize display counter to zero
+
+        // Configuration of dev and prod URL - usually will fetch a json file from the API in the environment
+        this.domainURL_Dev = "http://localhost:8080/";
+        // this.domainURL_Prod ="";
+
+        this.addItemAPI = this.domainURL_Dev + "item/add";
+        this.allItemAPI = this.domainURL_Dev + "item/all";
     }
 
-    addNft(title, imageURL, price, description, hashtag, view, category) {
-        
-        this.currentId++;
+    addNft(title, price, imageURL, description, category, nftObject) {
 
-        const nft = {
-            title: title,
-            price: price,
-            imageURL: imageURL,
-            description: description,
-            hashtag: hashtag,
-            view: view,
-            category: category,
-            id: this.currentId,
-            like: this.like,
-        };
+        let nftController = this;
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('price', price);
+        formData.append('imageUrl', imageUrl);
+        formData.append('description', description);
+        formData.append('category', category);
+        // formData.append('like', like);
 
-        this.allNfts.push(nft);
+        formData.append('nftfile', nftObject);
+
+        fetch(this.addItemAPI, {
+           method: 'POST',
+           body: formData
+           })
+           .then(function(response) {
+               console.log(response.status); // Will show you the status
+               if (response.ok) {
+                   alert("Successfully Added Product!")
+               }
+               else {
+                    throw Error(response.StatusText);
+               }
+           })
+           .catch((error) => {
+               console.error('Error:', error);
+               alert("Error adding item to Product")
+           });
 
     } //End of addNft method
 
@@ -47,6 +66,8 @@ class NftController {
 
         let nftInfo = "";
         let nftid = "";
+
+        this.getNftData();
 
         // initialise page display
         if (this.counter == 0) {
@@ -109,6 +130,39 @@ class NftController {
         
     } //end of displayNft method
 
+    getNftData() {
+
+        let nftController = this;
+
+        fetch(this.allItemAPI)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                console.log("2. receive data")
+                console.log(data);
+                data.forEach(function (item, index) {
+
+                    const nftObj = {
+
+                        id: nft.idNft,
+                        title: nft.title,
+                        price: nft.price,
+                        imageUrl: nft.imageUrl,
+                        description: nft.description,
+                        category: nft.category,
+                        like: nft.like
+
+                   };
+
+                    nftController.allNfts.push(nftObj);
+                });
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+    } // end of getNftData method
+
     // Method to filter through category and call filterNftArray() method
     filterNftCategory() {
         this.filters.forEach((category) => {
@@ -153,8 +207,7 @@ class NftController {
                 filterData = this.allNfts.filter((nft) => 
                     nft.category.toLowerCase().includes(filterValue) ||
                     nft.title.toLowerCase().includes(filterValue) ||
-                    nft.description.toLowerCase().includes(filterValue) ||
-                    nft.hashtag.toLowerCase().includes(filterValue)
+                    nft.description.toLowerCase().includes(filterValue)
                 );
             }
             else {
@@ -173,6 +226,8 @@ class NftController {
 
     //method to display array of NFT objects to home page
     displayCarousel() {
+
+        this.getNftData();
 
         let count = 0;
         let nftInfo = "";
@@ -266,8 +321,8 @@ const displayNftDetail = function (nft) {
     document.querySelector("#nftImage").src = nft.imageURL;
     document.querySelector("#nftDescription").innerHTML = nft.description;
     document.querySelector("#nftPrice").innerHTML = `Price: ${nft.price}`;
-    document.querySelector("#nftHashtag").innerHTML = nft.hashtag;
-    document.querySelector("#nftViews").innerHTML = nft.view;
+    // document.querySelector("#nftHashtag").innerHTML = nft.hashtag;
+    // document.querySelector("#nftViews").innerHTML = nft.view;
     document.querySelector("#nftLikes").innerHTML = `No. of likes: ${nft.like}`;
     document.querySelector("#nftIdAssign").innerHTML = `
         <button id="${nft.id}a" class="btn btn-primary">
