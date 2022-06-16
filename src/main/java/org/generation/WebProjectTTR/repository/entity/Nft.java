@@ -1,0 +1,95 @@
+package org.generation.WebProjectTTR.repository.entity;
+
+
+import org.generation.WebProjectTTR.controller.dto.Nftto;
+import javax.persistence.*;
+
+@Enitity
+public class Nft {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Integer idNft;//need to pass the id to a class method findItemById()
+
+    private String title;
+    private double price;
+    private String imageUrl;
+    private String description;
+
+    private String category;
+
+
+    public Nft() {
+    }
+
+    public Nft(NftDto NftDto) {
+        this.title = NftDto.getTitle();
+
+        this.price = NftDto.getPrice();
+
+        this.imageUrl = NftDto.getImageUrl();
+
+        this.description = NftDto.getDescription();
+
+        this.category = NftDto.getCategory();
+
+
+    }
+
+    public Integer getIdNft() {
+        return idNft;
+    }
+
+    public void setIdNft(Integer idNft) {
+        this.idNft = idNft;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Nft{" + "idNft=" + idNft + ", title='" + title + '\'' + ", price='" + price + '\'' + ", imageUrl='"
+                + imageUrl + '\'' + ",description='" + description + '\'' + ", category='" + category + '}';
+    }
+
+}
