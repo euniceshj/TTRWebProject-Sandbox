@@ -1,15 +1,13 @@
 package org.generation.WebProjectTTR.repository.entity;
 
-
-import org.generation.WebProjectTTR.controller.dto.Nftto;
+import org.generation.WebProjectTTR.controller.dto.NftDto;
 import javax.persistence.*;
 
-@Enitity
+@Entity
 public class Nft {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer idNft;//need to pass the id to a class method findItemById()
 
     private String title;
@@ -20,8 +18,7 @@ public class Nft {
     private String category;
 
 
-    public Nft() {
-    }
+    public Nft() { }
 
     public Nft(NftDto NftDto) {
         this.title = NftDto.getTitle();
@@ -93,3 +90,5 @@ public class Nft {
     }
 
 }
+
+
