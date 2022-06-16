@@ -20,16 +20,16 @@ public class Nft {
 
     public Nft() { }
 
-    public Nft(NftDto NftDto) {
-        this.title = NftDto.getTitle();
+    public Nft(NftDto nftDto) {
+        this.title = nftDto.getTitle();
 
-        this.price = NftDto.getPrice();
+        this.price = nftDto.getPrice();
 
-        this.imageUrl = NftDto.getImageUrl();
+        this.imageUrl = nftDto.getImageUrl();
 
-        this.description = NftDto.getDescription();
+        this.description = nftDto.getDescription();
 
-        this.category = NftDto.getCategory();
+        this.category = nftDto.getCategory();
 
 
     }
