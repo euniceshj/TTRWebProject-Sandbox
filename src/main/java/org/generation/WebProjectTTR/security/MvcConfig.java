@@ -6,10 +6,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+<<<<<<< HEAD
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
+=======
+>>>>>>> c6e936efbedc16944cdc7e5a80ba60a42d7e8ada
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
