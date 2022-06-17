@@ -13,37 +13,32 @@ Business Logic:
  */
 
 // Declaration of all Global variables
-const productList = [];
-
-// function clears user inputs in form
-function clearInput() {
-    document.querySelector("#nameOfCollection").value = "";
-    document.querySelector("#categoryField").value = "";
-    document.querySelector("#listPrice").value = "";
-    document.querySelector("#inputGroupFile02").value = "";
-    document.querySelector("#description").value = "";
-}
+const nftCollection = new NftController();
+let storeNft = ""
 
 // function handle form submission
-function submitForm() {
+newItemForm.addEventListener('submit', (event) => {
+    // Prevent default action - do not submit form first. (1) Form validation, (2) using own fetch method to send data over to backend
+    event.preventDefault();
     // store input values into variables
-    const name = document.querySelector("#nameOfCollection").value;
-    const category = document.querySelector("#categoryField").value;
-    const listPrice = document.querySelector("#listPrice").value;
-    const image = document.querySelector("#inputGroupFile02").value;
+    const title = document.querySelector("#nameOfCollection").value;
+    const price = document.querySelector("#listPrice").value;
+    const imageURL = document.querySelector("#inputGroupFile02").value.replace("C:\\fakepath\\", "");
     const description = document.querySelector("#description").value;
+    const category = document.querySelector("#categoryField").value;
 
     // create object to store values
     const productDetails = {
-        name: name,
-        category: category,
-        listPrice: listPrice,
-        image: image,
+        title: title,
+        price: price,
+        imageURL: imageURL,
         description: description,
+        category: category,
+        storeNft: storeNft
     };
 
     // store object into array
-    productList.push(productDetails);
+    nftCollection.addNft(productDetails);
 
     // clears user inputs in form
     clearInput();
@@ -51,12 +46,12 @@ function submitForm() {
     // reset category field to grey
     document.getElementById("categoryField").style.color = "grey";
 
-    console.log(productList); // testing
     alert(
-        "Thank you for your submission. Your NFT has been successfuly uploaded."
+        "Thank you for your submission. Your NFT has been successfully uploaded."
     );
-} // End of submitForm function
+} // End of addEventListener for submit form
 
+/*
 document
     .querySelector("button[type=submit]")
     .addEventListener("submit", (event) => {
@@ -72,7 +67,24 @@ document
         }
         
     });
+*/
 
+// function clears user inputs in form
+function clearInput() {
+    document.querySelector("#nameOfCollection").value = "";
+    document.querySelector("#categoryField").value = "";
+    document.querySelector("#listPrice").value = "";
+    document.querySelector("#inputGroupFile02").value = "";
+    document.querySelector("#description").value = "";
+}
+
+// select file input
+const input = document.querySelector('#inputGroupFile02');
+
+// add event listener
+input.addEventListener('change', () => {
+    storeNft = input.files[0];
+});
 
 
 
