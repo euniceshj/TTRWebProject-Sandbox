@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+Include the sec namespace in the HTML tag.
+
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -50,16 +53,41 @@
                     <li class="nav-item fst-italic">
                         <a class="nav-link" th:href="@{listCollection}">Create</a>
                     </li>
-                    <li class="nav-item">
-                        <a th:href="@{loginPage}">
+
+                    <!--Show logout button if logged in-->
+                    <div sec:authorize="isAuthenticated()">
+                        <form id="logOut" th:action="@{/logout}" method="post">
+                            <li class="nav-item fst-italic"><a class="nav-link" onclick="document.getElementById('logOut').submit();"> LOG OUT </a></li>
+                        </form>
+                    </div>
+
+                    <!--Show login button if logged out-->
+                    <div sec:authorize="isAnonymous()">
+                        <li class="nav-item fst-italic"> <a th:href="@{loginPage}">
                             <i class="bi bi-person-circle d-none d-lg-block"></i>
-                        </a>
-                    </li>
+                        </a></li>
+                    </div>
+<!--                    <li class="nav-item">-->
+<!--                        <a th:href="@{loginPage}">-->
+<!--                            <i class="bi bi-person-circle d-none d-lg-block"></i>-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li class="nav-item">
                         <div>
                             <i class="bi bi-wallet2 d-none d-lg-block text-secondary"></i>
                         </div>
-                        <a href="loginPage.html" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+
+                        <!--Show logout button if logged in-->
+                        <div sec:authorize="isAuthenticated()">
+                            <form id="logOut2" th:action="@{/logout}" method="post">
+                                <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log Out</a>
+                            </form>
+                        </div>
+
+                        <!--Show login button if logged out-->
+                        <div sec:authorize="isAnonymous()">
+                        <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+                        </div>
                     </li>
                 </ul>
             </div>
