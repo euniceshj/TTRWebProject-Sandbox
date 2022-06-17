@@ -1,42 +1,46 @@
 package org.generation.WebProjectTTR.service;
 
+import org.generation.WebProjectTTR.repository.NftRepository;
+import org.generation.WebProjectTTR.repository.entity.Nft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NftServiceMySQL implements NftService {
 
-    private final NftRepository NftRepository;
-    public NftServiceMySQL(@Autowired NftRepository NftRepository)
+    private final NftRepository nftRepository;
+    public NftServiceMySQL(@Autowired NftRepository nftRepository)
     {
-        this.NftRepository = NftRepository;
+        this.nftRepository = nftRepository;
     }
 
     @Override
-    public Nft save(Nft Nft) {
-        return NftRepository.save(Nft);
+    public Nft save(Nft nft) {
+        return nftRepository.save(nft);
     }
 
     @Override
     public void delete (int idNft) {
-        NftRepository.deleteById(idNft);
+        nftRepository.deleteById(idNft);
     }
 
     @Override
     List<Nft> all()
     {
     List<Nft> result = new ArrayList<>();
-    NftRepository.findAll().forEach(result :: add);
+    nftRepository.findAll().forEach(result :: add);
     return result;
     }
 
     @Override
     public Nft findById(int idNft)
     {
-        Optional<Nft> Nft = NftRepository.findById(idNft);
-        Nft nftResponse = Nft.get();
+        Optional<Nft> nft = nftRepository.findById(idNft);
+        Nft nftResponse = nft.get();
         return nftResponse;
     }
 
