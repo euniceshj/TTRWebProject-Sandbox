@@ -76,7 +76,18 @@ Include the sec namespace in the HTML tag.
                         <div>
                             <i class="bi bi-wallet2 d-none d-lg-block text-secondary"></i>
                         </div>
-                        <a href="loginPage.html" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+
+                        <!--Show logout button if logged in-->
+                        <div sec:authorize="isAuthenticated()">
+                            <form id="logOut2" th:action="@{/logout}" method="post">
+                                <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log Out</a>
+                            </form>
+                        </div>
+
+                        <!--Show login button if logged out-->
+                        <div sec:authorize="isAnonymous()">
+                        <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+                        </div>
                     </li>
                 </ul>
             </div>

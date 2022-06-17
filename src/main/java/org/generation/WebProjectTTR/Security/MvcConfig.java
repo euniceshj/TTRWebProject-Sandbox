@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    @Value("${nft.folder")
+    @Value("${nft.folder}")
     private String nftfolder;
 
     public void addViewControllers(ViewControllerRegistry registry) {
