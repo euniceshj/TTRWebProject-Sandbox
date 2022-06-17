@@ -1,12 +1,18 @@
 package org.generation.WebProjectTTR.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.*;
+
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+
+    @Value("${nft.folder}")
+    private String nftfolder;
 
     public void addViewControllers(ViewControllerRegistry registry) {
         //Map the browser's URL to a specific View (HTML) inside resources/templates directory
@@ -34,6 +40,12 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/")
                 .setCachePeriod(0);
 
+        Path uploadDir = Paths.get(nftfolder);
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        registry.addResourceHandler("/" + nftfolder + "/**")
+                .addResourceLocations("file:" + uploadPath + "/")
+                .setCachePeriod(0);
 
     }
 
