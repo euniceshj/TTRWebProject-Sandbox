@@ -29,7 +29,7 @@ public class NftServiceMySQL implements NftService {
     }
 
     @Override
-    List<Nft> all()
+    public List<Nft> all()
     {
     List<Nft> result = new ArrayList<>();
     nftRepository.findAll().forEach(result :: add);
