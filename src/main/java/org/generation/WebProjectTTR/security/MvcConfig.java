@@ -6,13 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-<<<<<<< HEAD
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
-
-=======
->>>>>>> c6e936efbedc16944cdc7e5a80ba60a42d7e8ada
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -45,7 +40,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/")
                 .setCachePeriod(0);
 
-        //expose the productimages folder to allow external client to access the files from the server
         Path uploadDir = Paths.get(nftfolder);
         String uploadPath = uploadDir.toFile().getAbsolutePath();
 
