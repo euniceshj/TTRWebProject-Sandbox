@@ -1,4 +1,4 @@
-package org.generation.WebProjectTTR.Security;
+package org.generation.WebProjectTTR.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
