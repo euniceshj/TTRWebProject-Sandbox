@@ -43,3 +43,17 @@ h1 {
 .loginBtn-margin {
     margin: 0 0 150px;
 }
+
+/* Invalid login error */
+
+.loginheader {
+    display: flex;
+    align-items: center;
+}
+
+.errormessage {
+    color: blue;
+    position: relative;
+    left: 20px;
+}
+

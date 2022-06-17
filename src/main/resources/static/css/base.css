@@ -38,6 +38,19 @@
     margin-left: -75px;
 }
 
+.toggle span {
+    display: none;
+}
+
+.toggle:hover span {
+    display: initial;
+    cursor: pointer;
+}
+
+.toggle:hover .icon {
+    display: none;
+}
+
 /* Footer Section */
 .footer-section {
     background-color: #94daff;

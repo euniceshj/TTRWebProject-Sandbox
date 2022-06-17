@@ -35,6 +35,11 @@
         <link rel="stylesheet" href="css/login.css" />
 
         <title>TTR-NFT - Home To The Hottest Digital Assets</title>
+
+        <script
+                src="https://kit.fontawesome.com/30e3775b67.js"
+                crossorigin="anonymous"
+        ></script>
     </head>
 
     <body>
@@ -48,21 +53,27 @@
             <div class="container login-section form-section">
                 <div class="row justify-content-center">
                     <div class="col col-md-6 col-xl-4">
+                        <div class="loginheader">
                         <h1>Login to TTR</h1>
+                        <div th:if="${param.error}" class="errormessage">
+                            Invalid username and password.
+                        </div>
+                        </div>
 
-                        <form th:action="@{/login}" method="post">
+                        <form th:action="@{/loginPage}" method="post">
                             <div class="form-group">
                                 <label
                                     for="exampleInputEmail1"
                                     class="label-margin"
-                                    >Email or username</label
+                                    >Email or Username</label
                                 >
                                 <input
-                                    type="email"
+                                    type="text"
+                                    name="username"
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
-                                    placeholder="Enter email"
+                                    placeholder="Enter email or username"
                                 />
                                 <small
                                     id="emailHelp"
@@ -80,6 +91,7 @@
                                 >
                                 <input
                                     type="password"
+                                    name="password"
                                     class="form-control form-margin label-margin"
                                     id="exampleInputPassword1"
                                     placeholder="Password"
@@ -95,9 +107,7 @@
                                     <a href="#" class="text-secondary">here</a> to sign up.
                                 </p>
                             </div>
-                            <div th:if="${param.error}">
-                                Invalid username and password.
-                            </div>
+
                             <div
                                 class="d-flex justify-content-center form-margin loginBtn-margin"
                             >
