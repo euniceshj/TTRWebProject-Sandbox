@@ -50,8 +50,8 @@ public class WebSecurityConfig {
         */
 
         http.authorizeRequests()
-                .antMatchers("/", "/products", "/aboutme", "/listCollection/**").permitAll()
-                //.antMatchers("/listCollection/**").hasRole("ADMIN")
+                .antMatchers("/", "/products", "/aboutme").permitAll()
+                .antMatchers("/listCollection/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/loginPage").permitAll()
