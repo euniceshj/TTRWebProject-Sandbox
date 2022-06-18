@@ -14,31 +14,22 @@ Business Logic:
 
 // Declaration of all Global variables
 const nftCollection = new NftController();
-let storeNft = ""
+let storeNft = "";
 
 // function handle form submission
-newItemForm.addEventListener('submit', (event) => {
+newNftForm.addEventListener('submit', (event) => {
+
     // Prevent default action - do not submit form first. (1) Form validation, (2) using own fetch method to send data over to backend
     event.preventDefault();
     // store input values into variables
     const title = document.querySelector("#nameOfCollection").value;
     const price = document.querySelector("#listPrice").value;
-    const imageURL = document.querySelector("#inputGroupFile02").value.replace("C:\\fakepath\\", "");
+    const imageUrl = document.querySelector("#inputGroupFile02").value.replace("C:\\fakepath\\", "");
     const description = document.querySelector("#description").value;
     const category = document.querySelector("#categoryField").value;
 
-    // create object to store values
-    const productDetails = {
-        title: title,
-        price: price,
-        imageURL: imageURL,
-        description: description,
-        category: category,
-        storeNft: storeNft
-    };
-
-    // store object into array
-    nftCollection.addNft(productDetails);
+    // pass inputs into addNft method
+    nftCollection.addNft(title, price, imageUrl, description, category, storeNft);
 
     // clears user inputs in form
     clearInput();
@@ -46,10 +37,11 @@ newItemForm.addEventListener('submit', (event) => {
     // reset category field to grey
     document.getElementById("categoryField").style.color = "grey";
 
-    alert(
+    /*alert(
         "Thank you for your submission. Your NFT has been successfully uploaded."
-    );
-} // End of addEventListener for submit form
+    );*/
+
+}); // End of addEventListener for submit form
 
 /*
 document
