@@ -1,8 +1,10 @@
 class NftController {
+
     constructor() {
+
         this.allNfts = [];
         this.tempNfts = [];
-        this.currentId = 0;
+        // this.currentId = 0;
         this.filters = [
             "all",
             "photography",
@@ -24,11 +26,12 @@ class NftController {
         this.domainURL_Dev = "http://localhost:8080/";
         // this.domainURL_Prod ="";
 
-        this.addItemAPI = this.domainURL_Dev + "item/add";
-        this.allItemAPI = this.domainURL_Dev + "item/all";
+        this.addItemAPI = this.domainURL_Dev + "nft/add";
+        this.allItemAPI = this.domainURL_Dev + "nft/all";
+
     }
 
-    addNft(title, price, imageURL, description, category, nftObject) {
+    addNft(title, price, imageUrl, description, category, nftObject) {
 
         let nftController = this;
         const formData = new FormData();
@@ -37,7 +40,7 @@ class NftController {
         formData.append('imageUrl', imageUrl);
         formData.append('description', description);
         formData.append('category', category);
-        // formData.append('like', like);
+        formData.append('numlikes', 0);
 
         formData.append('nftfile', nftObject);
 
@@ -48,7 +51,7 @@ class NftController {
            .then(function(response) {
                console.log(response.status); // Will show you the status
                if (response.ok) {
-                   alert("Successfully Added Product!")
+                   alert("Successfully Added NFT!")
                }
                else {
                     throw Error(response.StatusText);
@@ -61,42 +64,85 @@ class NftController {
 
     } //End of addNft method
 
-    //method to display array of NFT objects to product page
+    // method to display NFT objects from database
     displayNft() {
 
+        const nftController = this;
+
+        fetch(this.allItemAPI)
+            .then((resp) => resp.json())
+            .then(function(data) {
+
+                console.log("2. receive data")
+                console.log(data);
+
+                data.forEach((nft, index) => {
+
+                    const nftObj = {
+                        id: nft.idNft,
+                        title: nft.title,
+                        price: nft.price,
+                        imageUrl: nft.imageUrl,
+                        description: nft.description,
+                        category: nft.category,
+                        numlikes: nft.numlikes
+                   };
+
+                    nftController.allNfts.push(nftObj);
+                });
+
+            // check if css #id exists before calling displayNft method()
+            if ( document.querySelector("#nftController") != null) {
+                console.log(nftController.allNfts);
+                nftController.renderProductPage();
+            }
+
+            // check if css #id exists before calling displayCarousel method()
+            if ( document.querySelector("#carouselDisplay") != null) {
+                nftController.renderCarouselPage();
+            }
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    } // end of displayNft method
+
+    // method to generate html for product page
+    renderProductPage() {
+
         let nftInfo = "";
-        let nftid = "";
 
-        this.getNftData();
-
-        // initialise page display
         if (this.counter == 0) {
             this.tempNfts = this.allNfts;
         }
         this.counter++;
+        console.log(this.counter)
 
         this.tempNfts.forEach((nft, index) => {
-            nftid = "nft" + index; //nft1, nft2, nft3....
+
+            // nftid = "nft" + index; //nft1, nft2, nft3....
             nftInfo += `
                 <div class="col">
                     <div class="card border-dark">
                         <div class="like-button">
-                        <img
-                            src="${nft.imageURL}"
-                            class="card-img-top"
-                            alt="..."
-                        />
-                        <button class="btn btn-lg" id="${nftid}">
-                            <i class="fa-solid fa-heart"></i>
-                        </button>
+                            <img
+                                src="${nft.imageUrl}"
+                                class="card-img-top"
+                                alt="..."
+                            />
+                            <button class="btn btn-lg" id="nft${nft.id}-like">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
                         </div>
                         <div class="card-body">
-                        <h4 class="card-title">${nft.title}</h4>
-                        <div class="item-price">
-                            <h5>List price: ${nft.price}</h5>
-                            <a id="${nft.id}" href="#" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Buy now</a>
-                        </div>
+                            <h4 class="card-title">${nft.title}</h4>
+                            <div class="item-price">
+                                <h5>List price: ${nft.price}</h5>
+                                <a id="nft${nft.id}" href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Buy now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,20 +153,21 @@ class NftController {
     
         // Add eventlistener to all the buttons to display info in modal
         this.tempNfts.forEach((nft) => {
+            let nftid = "nft" + nft.id;
             document
-                .getElementById(nft.id)
+                .getElementById(nftid)
                 .addEventListener("click", () => {
                     displayNftDetail(nft);
                 });
         });
 
         //Add eventlistener to all the like buttons to increase number of likes by 1
-        this.tempNfts.forEach((nft, index) => {
-            nftid = "nft" + index;
+        this.tempNfts.forEach((nft) => {
+            let nftid = "nft" + nft.id + "-like";
             document
                 .getElementById(nftid)
                 .addEventListener("click", function () {
-                    nft.like++;
+                    nft.numlikes++;
                 });
         });
 
@@ -128,43 +175,11 @@ class NftController {
         this.filterNftCategory();
         console.log(this.tempNfts); // test
         
-    } //end of displayNft method
-
-    getNftData() {
-
-        let nftController = this;
-
-        fetch(this.allItemAPI)
-            .then((resp) => resp.json())
-            .then(function(data) {
-                console.log("2. receive data")
-                console.log(data);
-                data.forEach(function (item, index) {
-
-                    const nftObj = {
-
-                        id: nft.idNft,
-                        title: nft.title,
-                        price: nft.price,
-                        imageUrl: nft.imageUrl,
-                        description: nft.description,
-                        category: nft.category,
-                        like: nft.like
-
-                   };
-
-                    nftController.allNfts.push(nftObj);
-                });
-
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-
-    } // end of getNftData method
+    } //end of renderProductPage method
 
     // Method to filter through category and call filterNftArray() method
     filterNftCategory() {
+
         this.filters.forEach((category) => {
             document
                 .getElementById(category)
@@ -187,10 +202,12 @@ class NftController {
                 this.filterNftArray(searchInput, e);  
             }
         });
+
     } // end of method
 
     //Method to filter array of NFT objects based on category selected
     filterNftArray(filterValue, event) {
+
         this.tempNfts = [];
 
         // remove digits from css selector ID
@@ -221,17 +238,18 @@ class NftController {
             });
         }
         
-        this.displayNft(this.tempNfts);
+        this.displayNft();
+
     } // end of method
 
     //method to display array of NFT objects to home page
-    displayCarousel() {
+    renderCarouselPage() {
 
-        this.getNftData();
+        console.log(this.allNfts);
 
         let count = 0;
         let nftInfo = "";
-        let nftid = "";
+        // let nftid = "";
         let topSection1 = `
             <div class="carousel-item active">
                 <div class="row py-5">
@@ -289,7 +307,7 @@ class NftController {
                 }
 
                 nftInfo += `
-                            <img src="${nft.imageURL}" class="card-img-top rounded d-flex img-fluid" alt="...">
+                            <img src="${nft.imageUrl}" class="card-img-top rounded d-flex img-fluid" alt="...">
                             <div class="card-img-overlay d-flex flex-column justify-content-end px-4">
                                 <h5 class="card-title fw-bold text-white bg-secondary bg-opacity-75 display-6 ps-2 overflow-hidden text-nowrap d-inline-block text-truncate">${nft.title}</h5>
                                 <p class="card-text fw-bold fs-4 text-white bg-secondary bg-opacity-75 ps-2">Category: #${nft.category}</p>
@@ -312,31 +330,30 @@ class NftController {
 
     } // end of method
 
-} //End of productController class
-
+} //End of NftController class
 
 //function to add NFT values to modal
 const displayNftDetail = function (nft) {
     document.querySelector("#nftTitle").innerHTML = nft.title;
-    document.querySelector("#nftImage").src = nft.imageURL;
+    document.querySelector("#nftImage").src = nft.imageUrl;
     document.querySelector("#nftDescription").innerHTML = nft.description;
     document.querySelector("#nftPrice").innerHTML = `Price: ${nft.price}`;
     // document.querySelector("#nftHashtag").innerHTML = nft.hashtag;
     // document.querySelector("#nftViews").innerHTML = nft.view;
-    document.querySelector("#nftLikes").innerHTML = `No. of likes: ${nft.like}`;
+    document.querySelector("#nftLikes").innerHTML = `No. of likes: ${nft.numlikes}`;
     document.querySelector("#nftIdAssign").innerHTML = `
-        <button id="${nft.id}a" class="btn btn-primary">
+        <button id="nft${nft.id}a" class="btn btn-primary">
         Like <i class="fa-solid fa-thumbs-up"></i>
         </button>
     `;
     
     // to add likes when like button in modal is clicked
-    let nftid2 = nft.id + "a";
+    let nftid2 = "nft" + nft.id + "a";
     document
         .getElementById(nftid2)
         .addEventListener("click", () => {
-            nft.like++;
-            document.querySelector("#nftLikes").innerHTML = `No. of likes: ${nft.like}`;
+            nft.numlikes++;
+            document.querySelector("#nftLikes").innerHTML = `No. of likes: ${nft.numlikes}`;
         });
 };
 

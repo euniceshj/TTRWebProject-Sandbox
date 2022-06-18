@@ -1,4 +1,4 @@
-package org.generation.WebProjectTTR.Security;
+package org.generation.WebProjectTTR.security;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
-
 @Configuration
 public class WebSecurityConfig {
 
@@ -42,18 +41,17 @@ public class WebSecurityConfig {
         http.logout()
                 .logoutSuccessUrl("/index");
 
-
-
-        /*.antMatchers(......).permitAll() - tells Spring Security that these webpages
+        /*
+        .antMatchers(......).permitAll() - tells Spring Security that these webpages
          do not need to have login services
 
         .antMatchers(.....).hasRole("ADMIN") - tells Spring Security that only user
         with ADMIN role will be able to access the listCollection.html
+        */
 
-         */
         http.authorizeRequests()
-                .antMatchers("/", "/products", "/aboutme").permitAll()
-                .antMatchers("/listCollection/**").hasRole("ADMIN")
+                .antMatchers("/", "/products", "/aboutme", "/listCollection/**").permitAll()
+                //.antMatchers("/listCollection/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/loginPage").permitAll()

@@ -12,16 +12,16 @@ public class NftDto {
 
     private String category;
 
-    // private int like;
+    private int numlikes;
 
-    public NftDto(String title, double price, String imageUrl, String description, String category)
+    public NftDto(String title, double price, String imageUrl, String description, String category, int numlikes)
     {
         this.title = title;
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
         this.category = category;
-        // this.like = like;
+        this.numlikes = numlikes;
     }
 
     public String getTitle() {
@@ -64,14 +64,12 @@ public class NftDto {
         this.category = category;
     }
 
-    /*
-    public int getLike() {
-        return like;
+    public int getNumlikes() {
+        return numlikes;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setNumlikes(int numlikes) {
+        this.numlikes = numlikes;
     }
-    */
 
 }
