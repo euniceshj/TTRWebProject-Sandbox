@@ -14,13 +14,13 @@ public class Nft {
     private double price;
     private String imageUrl;
     private String description;
-
     private String category;
-
+    private int numlikes;
 
     public Nft() { }
 
     public Nft(NftDto nftDto) {
+
         this.title = nftDto.getTitle();
 
         this.price = nftDto.getPrice();
@@ -31,6 +31,7 @@ public class Nft {
 
         this.category = nftDto.getCategory();
 
+        this.numlikes = nftDto.getNumlikes();
 
     }
 
@@ -80,6 +81,14 @@ public class Nft {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getNumlikes() {
+        return numlikes;
+    }
+
+    public void setNumlikes(int numlikes) {
+        this.numlikes = numlikes;
     }
 
     @Override

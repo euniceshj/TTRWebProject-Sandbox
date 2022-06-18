@@ -32,9 +32,10 @@
   </head>
 
   <body>
-  <!-- Insert Navbar-->
-  <div th:insert="fragments/navbar.html :: navbar"></div>
-  <div th:insert="fragments/footer.html :: footer"></div>
+
+    <!-- Insert Navbar-->
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+    <div th:insert="fragments/footer.html :: footer"></div>
 
     
     <div class="container-fluid justify-content-center align-items-center">
@@ -43,7 +44,7 @@
             <div class="row">
                 <h1>List Your NFT</h1>
             </div>
-            
+
             <div class="row">
                 <form id="newNftForm" enctype="multipart/form-data">
                     <!--- Name of collection field --->
@@ -57,7 +58,7 @@
                         <label for="numberOfNfts" class="form-margin">Number of NFTs in Collection</label>
                         <input type="number" min="1" data-bind="value:replyNumber" class="form-control collectionField-margin" id="numberOfNfts" placeholder="Min. 1 NFT">
                     </div> -->
-                    
+
                     <!-- Category Selection field -->
                     <div class="form-group">
                         <label for="nameOfCollection" class="form-margin">Category</label>
@@ -78,44 +79,44 @@
                             <input required type="number" min="0.01" step="0.01" class="form-control collectionField-margin" id="listPrice" aria-describedby="emailHelp" placeholder="Price of each NFT in ETH">
                         </div>
                     </div>
-                    
+
                     <div>
                         <div class="input-group mb-3 collectionField-margin">
                             <input required type="file" class="form-control" id="inputGroupFile02">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
                     </div>
-                
+
                     <div class="form-group">
                         <label for="description" class="form-margin">Description</label>
-                        <textarea required class="form-control form-margin collectionField-margin" id="description" rows="3" placeholder="Describe your collection here"></textarea></textarea> 
+                        <textarea required class="form-control form-margin collectionField-margin" id="description" rows="3" maxlength="10" placeholder="Describe your collection here"></textarea>
                     </div>
 
                     <div class="d-flex justify-content-center submitBtn-margin">
                         <button class="btn btn-primary" type="submit">SUBMIT</button>
-                    </div> 
-                    
+                    </div>
+
                 </form>
-                
+
             </div>
 
-        </div>  
-    </div>    
+        </div>
+    </div>
 
     <!-- Footer Section-->
-  <div th:insert="fragments/footer.html :: footer"></div>
+    <div th:insert="fragments/footer.html :: footer"></div>
 
-   <!-- Bootstrap Script -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-   <!-- Header and Footer Script -->
-   <script src="js/baseStyle.js"></script>
-   <script>
+    <!-- Header and Footer Script -->
+    <script>
        document.getElementById("categoryField").addEventListener("change", function() {
         document.getElementById("categoryField").style.color = "black";
         });
-   </script>
-   <script src="js/productForm.js"></script>
+    </script>
+    <script src="js/nftController.js"></script>
+    <script src="js/productForm.js"></script>
 
   </body>
 </html>

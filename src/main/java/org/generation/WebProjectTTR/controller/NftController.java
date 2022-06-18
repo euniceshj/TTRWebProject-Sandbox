@@ -32,13 +32,13 @@ public class NftController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/{idNft}")
     public Nft findItemById(@PathVariable Integer idNft) {
         return nftService.findById(idNft);
     }
 
     @CrossOrigin
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idNft}")
     public void delete(@PathVariable Integer idNft) {
         nftService.delete(idNft);
     }
@@ -50,14 +50,14 @@ public class NftController {
                       @RequestParam(name="imageUrl", required = true) String imageUrl,
                       @RequestParam(name="description", required = true) String description,
                       @RequestParam(name="category", required = true) String category,
-                      // @RequestParam(name="like", required = true) int like,
+                      @RequestParam(name="numlikes", required = true) int numlikes,
                       @RequestParam("nftfile") MultipartFile multipartFile) throws IOException
     {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         FileUploadUtil.saveFile(nftFolder, fileName, multipartFile);
 
         String fullPath = nftFolder + "/" + imageUrl;
-        NftDto nftDto = new NftDto(title, price, fullPath, description, category);
+        NftDto nftDto = new NftDto(title, price, fullPath, description, category, numlikes);
         nftService.save(new Nft(nftDto));
     }
 
