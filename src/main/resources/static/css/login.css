@@ -54,6 +54,7 @@ h1 {
 .errormessage {
     color: blue;
     position: relative;
-    left: 20px;
+    margin-left: 30px;
+    font-size: 14px;
 }
 
