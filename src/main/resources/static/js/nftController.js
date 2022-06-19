@@ -109,19 +109,22 @@ class NftController {
 
     } // end of displayNft method
 
-    // method to generate html for product page
+    // method to render product page
     renderProductPage() {
+
+        this.renderProductPageHTML(this.allNfts);
+
+        //On user clicks, filter NFT based on category and display
+        this.filterNftCategory();
+        
+    } //end of renderProductPage method
+
+    // method to generate html and apply event listeners
+    renderProductPageHTML(array) {
 
         let nftInfo = "";
 
-        if (this.counter == 0) {
-            this.tempNfts = this.allNfts;
-        }
-        this.counter++;
-        console.log(this.counter);
-        console.log(this.tempNfts);
-
-        this.tempNfts.forEach((nft, index) => {
+        array.forEach((nft, index) => {
 
             // nftid = "nft" + index; //nft1, nft2, nft3....
             nftInfo += `
@@ -151,9 +154,9 @@ class NftController {
         });
 
         document.querySelector("#nftController").innerHTML = nftInfo;
-    
+
         // Add eventlistener to all the buttons to display info in modal
-        this.tempNfts.forEach((nft) => {
+        array.forEach((nft) => {
             let nftid = "nft" + nft.id;
             document
                 .getElementById(nftid)
@@ -163,7 +166,7 @@ class NftController {
         });
 
         //Add eventlistener to all the like buttons to increase number of likes by 1
-        this.tempNfts.forEach((nft) => {
+        array.forEach((nft) => {
             let nftid = "nft" + nft.id + "-like";
             document
                 .getElementById(nftid)
@@ -172,10 +175,7 @@ class NftController {
                 });
         });
 
-        //On user clicks, filter NFT based on category and display
-        this.filterNftCategory();
-        
-    } //end of renderProductPage method
+    } // end of method
 
     // Method to filter through category and call filterNftArray() method
     filterNftCategory() {
@@ -244,8 +244,7 @@ class NftController {
         
         // check if css #id exists before calling displayNft method()
         if ( document.querySelector("#nftController") != null) {
-            console.log(nftController.allNfts);
-            this.renderProductPage();
+            this.renderProductPageHTML(this.tempNfts);
         }
 
         // check if css #id exists before calling displayCarousel method()
