@@ -58,7 +58,7 @@ Include the sec namespace in the HTML tag.
                     <div sec:authorize="isAuthenticated()">
                         <form id="logOut" th:action="@{/logout}" method="post">
                             <li class="nav-item fst-italic">
-                                <a class="nav-link toggle" onclick="document.getElementById('logOut').submit();">
+                                <a class="nav-link toggle d-none d-lg-block" onclick="document.getElementById('logOut').submit();">
                                     <i class="fa-solid fa-arrow-right-to-bracket icon"></i>
                                     <span>Log Out</span>
                                 </a>
@@ -69,7 +69,7 @@ Include the sec namespace in the HTML tag.
                     <!--Show login button if logged out-->
                     <div sec:authorize="isAnonymous()">
                         <li class="nav-item fst-italic">
-                            <a th:href="@{loginPage}" class="toggle">
+                            <a th:href="@{loginPage}" class="toggle d-none d-lg-block">
                                 <i class="fa-solid fa-arrow-right-to-bracket icon"></i>
                                 <span>Log In</span>
                             </a>
