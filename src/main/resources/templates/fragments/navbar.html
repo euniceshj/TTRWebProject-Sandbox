@@ -57,16 +57,23 @@ Include the sec namespace in the HTML tag.
                     <!--Show logout button if logged in-->
                     <div sec:authorize="isAuthenticated()">
                         <form id="logOut" th:action="@{/logout}" method="post">
-                            <li class="nav-item fst-italic"><a class="nav-link toggle" onclick="document.getElementById('logOut').submit();"><i class="fa-solid fa-arrow-right-to-bracket icon"></i><span>Log Out</span></a></li>
+                            <li class="nav-item fst-italic">
+                                <a class="nav-link toggle" onclick="document.getElementById('logOut').submit();">
+                                    <i class="fa-solid fa-arrow-right-to-bracket icon"></i>
+                                    <span>Log Out</span>
+                                </a>
+                            </li>
                         </form>
                     </div>
 
                     <!--Show login button if logged out-->
                     <div sec:authorize="isAnonymous()">
-                        <li class="nav-item fst-italic"><a th:href="@{loginPage}" class="toggle">
-                            <i class="fa-solid fa-arrow-right-to-bracket icon"></i>
-                            <span>Log In</span>
-                        </a></li>
+                        <li class="nav-item fst-italic">
+                            <a th:href="@{loginPage}" class="toggle">
+                                <i class="fa-solid fa-arrow-right-to-bracket icon"></i>
+                                <span>Log In</span>
+                            </a>
+                        </li>
                     </div>
 <!--                    <li class="nav-item">-->
 <!--                        <a th:href="@{loginPage}">-->
@@ -87,7 +94,7 @@ Include the sec namespace in the HTML tag.
 
                         <!--Show login button if logged out-->
                         <div sec:authorize="isAnonymous()">
-                        <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
+                            <a th:href="@{loginPage}" class="nav-link button btn-primary rounded text-center text-white d-block d-lg-none">Log In</a>
                         </div>
                     </li>
                 </ul>
