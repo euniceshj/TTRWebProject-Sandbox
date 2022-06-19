@@ -1,5 +1,9 @@
 package org.generation.WebProjectTTR;
 
+import org.generation.WebProjectTTR.repository.NftRepository;
+import org.generation.WebProjectTTR.repository.entity.Nft;
+import org.generation.WebProjectTTR.service.NftService;
+import org.generation.WebProjectTTR.service.NftServiceMySQL;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
