@@ -18,8 +18,8 @@ public class WebSecurityConfig {
     public void configAuthentication( AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)     //Connect to the database
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")     //Checking the username and password
-                .authoritiesByUsernameQuery("select username, role from users where username=?")
+                .usersByUsernameQuery("select username, password, enabled from user where username=?")     //Checking the username and password
+                .authoritiesByUsernameQuery("select username, role from user where username=?")
         ;
     }
 
