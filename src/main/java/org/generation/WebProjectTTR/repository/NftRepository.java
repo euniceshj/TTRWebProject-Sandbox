@@ -1,8 +1,9 @@
 package org.generation.WebProjectTTR.repository;
 
 import org.generation.WebProjectTTR.repository.entity.Nft;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface NftRepository extends CrudRepository<Nft, Integer>
+public interface NftRepository extends PagingAndSortingRepository<Nft, Integer>
 {
+    // blank
 }

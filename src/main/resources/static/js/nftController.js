@@ -4,6 +4,7 @@ class NftController {
 
         this.allNfts = [];
         this.tempNfts = [];
+        this.pageNfts = [];
         // this.currentId = 0;
         this.filters = [
             "all",
@@ -93,7 +94,6 @@ class NftController {
 
             // check if css #id exists before calling displayNft method()
             if ( document.querySelector("#nftController") != null) {
-                console.log(nftController.allNfts);
                 nftController.renderProductPage();
             }
 
@@ -155,7 +155,7 @@ class NftController {
 
         document.querySelector("#nftController").innerHTML = nftInfo;
 
-        // Add eventlistener to all the buttons to display info in modal
+        // Add event listener to all the buttons to display info in modal
         array.forEach((nft) => {
             let nftid = "nft" + nft.id;
             document
@@ -165,7 +165,7 @@ class NftController {
                 });
         });
 
-        //Add eventlistener to all the like buttons to increase number of likes by 1
+        //Add event listener to all the like buttons to increase number of likes by 1
         array.forEach((nft) => {
             let nftid = "nft" + nft.id + "-like";
             document
@@ -180,6 +180,7 @@ class NftController {
     // Method to filter through category and call filterNftArray() method
     filterNftCategory() {
 
+        // event listener for category buttons
         this.filters.forEach((category) => {
             document
                 .getElementById(category)
@@ -190,6 +191,7 @@ class NftController {
                 });
         });
 
+        // event listener for search bar 1
         document.querySelector("#searchBar").addEventListener("keypress", (e) =>{
             if (e.key == "Enter") {
                 let searchInput = e.target.value;
@@ -198,6 +200,7 @@ class NftController {
             }
         });
 
+        // event listener for search bar 2
         document.querySelector("#searchBar2").addEventListener("keypress", (e) =>{
             if (e.key == "Enter") {
                 let searchInput = e.target.value;
@@ -241,17 +244,62 @@ class NftController {
                 this.tempNfts.push(nft);
             });
         }
-        
+
+        // this.pageFilter();
+        // console.log(this.pageNfts);
+
         // check if css #id exists before calling displayNft method()
-        if ( document.querySelector("#nftController") != null) {
+        if (document.querySelector("#nftController") != null) {
             this.renderProductPageHTML(this.tempNfts);
         }
 
         // check if css #id exists before calling displayCarousel method()
-        if ( document.querySelector("#carouselDisplay") != null) {
+        if (document.querySelector("#carouselDisplay") != null) {
             this.renderCarouselPage();
         }
 
+    } // end of method
+
+    // work in progess. to filter array based on clicked pagination button
+    pageFilter() {
+
+        // Add event listener for pagination
+        let pageSize = 9;
+        let numPages = Math.floor(this.tempNfts.length / pageSize) + 1;
+        console.log(numPages); // test
+        let page = "page-"
+
+        for (let i = 1; i <= numPages; i++) {
+
+            let pageIndex = page + i;
+
+            document.getElementById(pageIndex).addEventListener("click", () => {
+                let newNftArray = [];
+                let counter = 1;
+
+                console.log(this.tempNfts); // test
+
+                if (this.tempNfts.length <= (i-1) * 9) {
+                    newNftArray = [];
+                }
+                else {
+                    this.tempNfts.forEach((nft) => {
+                        if (counter > (i-1) * 9 && counter <= i * 9) {
+                            newNftArray.push(nft);
+                            counter++;
+                            console.log(counter);
+                        }
+                    });
+                }
+
+                console.log(newNftArray); // test
+                this.pageNfts = newNftArray;
+                return true;
+            });
+
+        }
+
+        return false;
     } // end of method
 
     //method to display array of NFT objects to home page

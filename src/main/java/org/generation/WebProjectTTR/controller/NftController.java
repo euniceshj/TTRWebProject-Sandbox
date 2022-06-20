@@ -6,6 +6,7 @@ import org.generation.WebProjectTTR.service.NftService;
 import org.generation.WebProjectTTR.controller.dto.NftDto;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.Page;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +60,13 @@ public class NftController {
         String fullPath = nftFolder + "/" + imageUrl;
         NftDto nftDto = new NftDto(title, price, fullPath, description, category, numlikes);
         nftService.save(new Nft(nftDto));
+    }
+
+    @CrossOrigin
+    @RequestMapping("/page/{pageNumber}")
+    public Page<Nft> generatePagination(@PathVariable Integer pageNumber)
+    {
+        return nftService.getPagination(pageNumber);
     }
 
 }
