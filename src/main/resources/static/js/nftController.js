@@ -5,7 +5,7 @@ class NftController {
         this.allNfts = [];
         this.tempNfts = [];
         this.pageNfts = [];
-        // this.currentId = 0;
+
         this.filters = [
             "all",
             "photography",
@@ -124,6 +124,23 @@ class NftController {
 
         let nftInfo = "";
 
+        if (this.counter == 0) {
+            this.tempNfts = this.allNfts;
+            this.counter++;
+            console.log(this.counter);
+
+            // to filter 9 items for initial nft page display
+            let count = 1;
+            array = [];
+            this.tempNfts.forEach((nft) => {
+                if (count <= 9) {
+                    array.push(nft);
+                    count++;
+                }
+            });
+            this.filterNftArray("all", "");
+        }
+
         array.forEach((nft, index) => {
 
             // nftid = "nft" + index; //nft1, nft2, nft3....
@@ -215,6 +232,7 @@ class NftController {
     filterNftArray(filterValue, event) {
 
         this.tempNfts = [];
+        let executeFunc = true;
         console.log("filtering NFT")
 
         // remove digits from css selector ID
@@ -222,6 +240,10 @@ class NftController {
 
         if (filterValue == "all") {
             this.tempNfts = this.allNfts;
+
+            // to trigger page 1 click event
+            document.getElementById('page-1').addEventListener("click", () => executeFunc = false)
+            document.getElementById('page-1').click();
         }
         else {
             filterValue = filterValue.match(/[a-z]/gi).join("").toLowerCase();
@@ -245,11 +267,10 @@ class NftController {
             });
         }
 
-        // this.pageFilter();
-        // console.log(this.pageNfts);
+        this.pageFilter();
 
         // check if css #id exists before calling displayNft method()
-        if (document.querySelector("#nftController") != null) {
+        if (document.querySelector("#nftController") != null && executeFunc) {
             this.renderProductPageHTML(this.tempNfts);
         }
 
@@ -265,7 +286,7 @@ class NftController {
 
         // Add event listener for pagination
         let pageSize = 9;
-        let numPages = Math.floor(this.tempNfts.length / pageSize) + 1;
+        let numPages = Math.floor(this.allNfts.length / pageSize) + 1;
         console.log(numPages); // test
         let page = "page-"
 
@@ -280,26 +301,26 @@ class NftController {
                 console.log(this.tempNfts); // test
 
                 if (this.tempNfts.length <= (i-1) * 9) {
+                    console.log("Array is empty")
                     newNftArray = [];
                 }
                 else {
                     this.tempNfts.forEach((nft) => {
                         if (counter > (i-1) * 9 && counter <= i * 9) {
                             newNftArray.push(nft);
-                            counter++;
-                            console.log(counter);
                         }
+                        counter++;
                     });
                 }
 
                 console.log(newNftArray); // test
                 this.pageNfts = newNftArray;
-                return true;
+                this.renderProductPageHTML(this.pageNfts);
+
             });
 
         }
 
-        return false;
     } // end of method
 
     //method to display array of NFT objects to home page
