@@ -102,3 +102,7 @@
         display: none;
     }
 }
+
+.pagination {
+    margin-bottom: 150px;
+}

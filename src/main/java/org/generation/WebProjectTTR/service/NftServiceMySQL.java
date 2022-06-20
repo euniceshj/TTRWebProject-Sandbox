@@ -3,6 +3,9 @@ package org.generation.WebProjectTTR.service;
 import org.generation.WebProjectTTR.repository.NftRepository;
 import org.generation.WebProjectTTR.repository.entity.Nft;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,5 +47,11 @@ public class NftServiceMySQL implements NftService {
         return nftResponse;
     }
 
+    @Override
+    public Page<Nft> getPagination (Integer pageNumber)
+    {
+        Pageable pageable = PageRequest.of(pageNumber, 9);
+        return nftRepository.findAll(pageable);
+    }
 
 }
