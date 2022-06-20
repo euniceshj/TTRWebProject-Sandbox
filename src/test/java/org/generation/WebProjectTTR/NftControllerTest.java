@@ -1,5 +1,7 @@
 package org.generation.WebProjectTTR;
 
+import org.generation.WebProjectTTR.controller.NftController;
+import org.generation.WebProjectTTR.service.NftService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -20,14 +22,14 @@ public class NftControllerTest {
 
     @Test
     public void listNftService() {
-        nftController.getNft();
+        nftController.getNfts();
         Mockito.verify(nftService).all();
     }
 
     @Test
     public void findNftService() {
         int id = 2;
-        nftController.findNftById(id);
+        nftController.findItemById(id);
         Mockito.verify(nftService).findById(id);
     }
 
