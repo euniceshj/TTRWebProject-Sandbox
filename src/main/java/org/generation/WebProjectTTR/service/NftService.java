@@ -1,6 +1,8 @@
 package org.generation.WebProjectTTR.service;
 
 import org.generation.WebProjectTTR.repository.entity.Nft;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 public interface NftService {
     List<Nft> all();
@@ -10,5 +12,7 @@ public interface NftService {
     void delete(int idNft);
 
     Nft findById(int idNft);
+
+    Page<Nft> getPagination(Integer pageNumber);
 
 }
