@@ -57,6 +57,10 @@ header {
     max-height: 200px;
 }
 
+.sponsor-section {
+    margin-bottom: 100px;
+}
+
 /* Contact Us Section */
 .contact-section {
     background-color: #94daff;
