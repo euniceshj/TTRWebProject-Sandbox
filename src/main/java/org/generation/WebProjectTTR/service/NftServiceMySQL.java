@@ -28,7 +28,7 @@ public class NftServiceMySQL implements NftService {
 
     @Override
     public void delete (int idNft) {
-        nftRepository.deleteById(idNft);
+        nftRepository.deleteById((long) idNft);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class NftServiceMySQL implements NftService {
     @Override
     public Nft findById(int idNft)
     {
-        Optional<Nft> nft = nftRepository.findById(idNft);
+        Optional<Nft> nft = nftRepository.findById((long) idNft);
         Nft nftResponse = nft.get();
         return nftResponse;
     }
@@ -52,6 +52,17 @@ public class NftServiceMySQL implements NftService {
     {
         Pageable pageable = PageRequest.of(pageNumber, 9);
         return nftRepository.findAll(pageable);
+    }
+
+    /*@Override
+    public Long getNftCount() {
+        return nftRepository.count();
+    }*/
+
+    @Override
+    public Page<Nft> findByCategory(String name, Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 9);
+        return nftRepository.findAllByCategory(name, pageable);
     }
 
 }

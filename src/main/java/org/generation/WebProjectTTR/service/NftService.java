@@ -15,4 +15,8 @@ public interface NftService {
 
     Page<Nft> getPagination(Integer pageNumber);
 
+    // Long getNftCount();
+
+    Page<Nft> findByCategory(String name, Integer pageNumber);
+
 }

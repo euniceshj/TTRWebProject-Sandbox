@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/nft")
@@ -63,10 +64,22 @@ public class NftController {
     }
 
     @CrossOrigin
-    @RequestMapping("/page/{pageNumber}")
+    @GetMapping("/page/{pageNumber}")
     public Page<Nft> generatePagination(@PathVariable Integer pageNumber)
     {
         return nftService.getPagination(pageNumber);
+    }
+
+    @CrossOrigin
+    @GetMapping("/{category}/page/{pageNumber}")
+    public Page<Nft> getCategoryResp(@PathVariable String category, @PathVariable Integer pageNumber)
+    {
+        // found that knowing total count of NFTs is not required. have commented out all corresponding codes
+        // Long count = nftService.getNftCount();
+        // Integer numPages = (int)Math.floor(count / 9) + 1;
+
+        return nftService.findByCategory(category, pageNumber);
+
     }
 
 }
